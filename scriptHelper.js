@@ -21,25 +21,38 @@ function validateInput(testInput) {
     let copilot = document.querySelector("input[name=copilotName]");
     let fuelLevel = document.querySelector("input[name=fuelLevel]");
     let cargoMass = document.querySelector("input[name=cargoMass]");
+
+    if (pilot.value === "" || copilot.value ==="" || fuelLevel.value === "" || cargoMass.value === ""){
+        return "Empty";
+    }
+    else if ((isNaN(cargoMass.value)) || (isNaN(fuelLevel.value))) {
+        return "Not a Number";
+     }   
+     else if ((!isNaN(pilot.value)) || (!isNaN(copilot.value))) {
+        return "Is a Number";
+     }  
+ }
+
+   
     
-}
+
+    
+
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
 
-    if (pilot.value === "" || copilot.value === "" || cargoMass.value === "" || fuelLevel.value === "" ) {
+    if (validateInput() === "Empty") {
         alert("All fields are required!");
-
-    if (!isNaN(cargoMass) || !isNaN(fuelLevel)){
-        alert ("Must be numeric values only");
     }
-
-    if (isNaN(pilot) || isNaN(copilot)){
-        alert ("Names must be letters only");
+    if (validateInput() === "Is a Number"){
+        alert ("The pilot's names must be letters only");
+    }
+    if (validateInput() === "Not a Number"){
+        alert ("Cargo Mass and Fuel Level must be numbers only");
     }
 }
 
-
-}
+    
 
 async function myFetch() {
     let planetsReturned;
