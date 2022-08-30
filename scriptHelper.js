@@ -17,42 +17,62 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 }
 
 function validateInput(testInput) {
-    let pilot = document.querySelector("input[name=pilotName]");
-    let copilot = document.querySelector("input[name=copilotName]");
-    let fuelLevel = document.querySelector("input[name=fuelLevel]");
-    let cargoMass = document.querySelector("input[name=cargoMass]");
 
-    if (pilot.value === "" || copilot.value ==="" || fuelLevel.value === "" || cargoMass.value === ""){
+    
+
+    if (testInput === ""){
         return "Empty";
     }
-    else if ((isNaN(cargoMass.value)) || (isNaN(fuelLevel.value))) {
+    else if (isNaN(Number(testInput))) {
         return "Not a Number";
      }   
-     else if ((!isNaN(pilot.value)) || (!isNaN(copilot.value))) {
+     else if (!isNaN(Number(testInput))) {
         return "Is a Number";
      }  
  }
+
+//----------------------------------------------------
+
+
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
+
+         pilot = document.querySelector("input[name=pilotName]");
+         copilot = document.querySelector("input[name=copilotName]");
+         fuelLevel = document.querySelector("input[name=fuelLevel]");
+         cargoMass = document.querySelector("input[name=cargoMass]");
+
+        //  list = []
+
+        
+
+    if (validateInput(pilot.value) === "Empty" || validateInput(copilot.value) === "Empty" || validateInput(fuelLevel.value) === "Empty" || validateInput(cargoMass.value) === "Empty") {
+        alert("All fields are required!");
+    }
+    else if (validateInput(copilot.value) === "Is a Number" || validateInput(pilot.value) === "Is a Number"){
+        alert ("The pilot's names must be letters only");
+    }
+    else if (validateInput(cargoMass.value) === "Not a Number" || validateInput(fuelLevel.value) === "Not a Number"){
+        alert ("Cargo Mass and Fuel Level must be numbers only");
+    }
+
+    // let faultyItems = document.getElementById("faultyItems");
+    // let pilotStatus = document.getElementById("pilotStatus");
+    // let copilotStatus = document.getElementById("copilotStatus");
+
+    // pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
+    // copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
+
+    // if (cargoMass > 10000){
+    //     faultyItems.style.visibility = "visible";
+    // }
+
+}
 
    
     
 
     
-
-
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
-
-    if (validateInput() === "Empty") {
-        alert("All fields are required!");
-    }
-    if (validateInput() === "Is a Number"){
-        alert ("The pilot's names must be letters only");
-    }
-    if (validateInput() === "Not a Number"){
-        alert ("Cargo Mass and Fuel Level must be numbers only");
-    }
-}
-
-    
+//----------------------------------------------------
 
 async function myFetch() {
     let planetsReturned;
