@@ -11,17 +11,16 @@ function addDestinationInfo(
   imageUrl
 ) {
   // Here is the HTML formatting for our mission target div.
-  /*
-                 <h2>Mission Destination</h2>
-                 <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
-                     <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
-                 </ol>
-                 <img src="">
-    */
+  let missionTarget = document.getElementById("missionTarget");
+  missionTarget.innerText = `<h2>Mission Destination</h2>
+                   <ol>
+                       <li>Name: ${name} </li>
+                       <li>Diameter: ${diameter}</li>
+                       <li>Star: ${star}</li>
+                       <li>Distance from Earth: ${distance}</li>
+                       <li>Number of Moons: ${moons}</li>
+                   </ol>
+                   <img src="${imageURL}">`;
 }
 
 function validateInput(testInput) {
@@ -110,12 +109,20 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
 async function myFetch() {
   let planetsReturned;
 
-  planetsReturned = await fetch().then(function (response) {});
-
-  return planetsReturned;
+  planetsReturned = await fetch(
+    "https://handlers.education.launchcode.org/static/planets.json"
+  ).then(function (response) {
+    return response.json();
+  });
 }
 
-function pickPlanet(planets) {}
+//----------------------------------------------------
+
+function pickPlanet(listedPlanets) {
+  let planetIndex = Math.round(Math.random() * (listedPlanets.length - 1));
+  let planetChoice = listedPlanets[planetIndex];
+  return planetChoice;
+}
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
