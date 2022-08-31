@@ -118,11 +118,11 @@ async function myFetch() {
 
 //----------------------------------------------------
 
-function pickPlanet(listedPlanets) {
-  let planetIndex = Math.round(Math.random() * (listedPlanets.length - 1));
-  let planetChoice = listedPlanets[planetIndex];
-  return planetChoice;
-}
+// function pickPlanet(listedPlanets) {
+//   let planetIndex = Math.round(Math.random() * (listedPlanets.length - 1));
+//   let planetChoice = listedPlanets[planetIndex];
+//   return planetChoice;
+// }
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;

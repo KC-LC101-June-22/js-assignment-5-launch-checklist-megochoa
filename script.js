@@ -12,11 +12,11 @@ window.addEventListener("load", function () {
 
   let listedPlanetsResponse = myFetch();
   //document.getElementById("myFetch(planetsReturned.value)");
-
+  console.log(listedPlanetsResponse);
   listedPlanetsResponse
     .then(function (result) {
       listedPlanets = result;
-      console.log(listedPlanets);
+      console.log("listedPlanets", listedPlanets);
     })
     .then(function () {
       console.log(listedPlanets);
