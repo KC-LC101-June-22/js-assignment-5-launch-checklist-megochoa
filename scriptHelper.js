@@ -12,7 +12,7 @@ function addDestinationInfo(
 ) {
   // Here is the HTML formatting for our mission target div.
   let missionTarget = document.getElementById("missionTarget");
-  missionTarget.innerText = `<h2>Mission Destination</h2>
+  missionTarget.innerHTML = `<h2>Mission Destination</h2>
                    <ol>
                        <li>Name: ${name} </li>
                        <li>Diameter: ${diameter}</li>
@@ -20,7 +20,7 @@ function addDestinationInfo(
                        <li>Distance from Earth: ${distance}</li>
                        <li>Number of Moons: ${moons}</li>
                    </ol>
-                   <img src="${imageURL}">`;
+                   <img src="${imageUrl}">`;
 }
 
 function validateInput(testInput) {
@@ -73,8 +73,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
 
   if (cargoMass.value > 10000 && fuelLevel.value < 10000) {
     faultyItems.style.visibility = "visible";
-    pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
-    copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
+    pilotStatus.innerText = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerText = `Co-pilot ${copilot.value} is ready for launch`;
     launchStatus.innerText = "Shuttle not ready for launch";
     launchStatus.style.color = "red";
   }
@@ -83,46 +83,57 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     faultyItems.style.visibility = "visible";
     launchStatus.innerText = "Shuttle not ready for launch";
     launchStatus.style.color = "red";
-    pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
-    copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
+    pilotStatus.innerText = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerText = `Co-pilot ${copilot.value} is ready for launch`;
   }
 
   if (fuelLevel.value > 10000) {
     faultyItems.style.visibility = "visible";
     launchStatus.innerText = "Shuttle not ready for launch";
     launchStatus.style.color = "red";
-    pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
-    copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
+    pilotStatus.innerText = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerText = `Co-pilot ${copilot.value} is ready for launch`;
   }
 
   if (cargoMass.value < 10000 && fuelLevel.value > 10000) {
     faultyItems.style.visibility = "visible";
     launchStatus.innerText = "Shuttle is ready for launch";
     launchStatus.style.color = "green";
-    pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
-    copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
+    pilotStatus.innerText = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerText = `Co-pilot ${copilot.value} is ready for launch`;
   }
 }
 
 //----------------------------------------------------
 
 async function myFetch() {
-  let planetsReturned;
-
-  planetsReturned = await fetch(
+  return await fetch(
     "https://handlers.education.launchcode.org/static/planets.json"
-  ).then(function (response) {
-    return response.json();
-  });
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    });
 }
+
+// async function myFetch() {
+//   let planetsReturned;
+
+//   planetsReturned = await fetch(
+//     "https://handlers.education.launchcode.org/static/planets.json"
+//   ).then(function (response) {
+//     return response.json();
+//   });
+// }
 
 //----------------------------------------------------
 
-// function pickPlanet(listedPlanets) {
-//   let planetIndex = Math.round(Math.random() * (listedPlanets.length - 1));
-//   let planetChoice = listedPlanets[planetIndex];
-//   return planetChoice;
-// }
+function pickPlanet(listedPlanets) {
+  let planetIndex = Math.round(Math.random() * (listedPlanets.length - 1));
+  let planetChoice = listedPlanets[planetIndex];
+  // console.log(planetChoice);
+  return planetChoice;
+}
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
