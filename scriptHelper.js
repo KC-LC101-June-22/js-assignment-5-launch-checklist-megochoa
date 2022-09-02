@@ -71,44 +71,41 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
   cargoStatus = document.getElementById("cargoStatus");
   fuelStatus = document.getElementById("fuelStatus");
 
+  //should be else if and go first. most exclusive checks are listed first
+  if (cargoMass.value > 10000 && fuelLevel.value < 10000) {
+    list.style.visibility = "visible";
+    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
+    launchStatus.innerText = "Shuttle not ready for launch";
+    launchStatus.style.color = "rgb(199, 37, 78)";
+    cargoStatus.innerText = "Cargo mass too heavy for launch";
+    fuelStatus.innerText = "Fuel level too low for launch";
+  } else if (fuelLevel.value < 10000 && cargoMass.value <= 10000) {
+    list.style.visibility = "visible";
+    launchStatus.style.color = "rgb(199, 37, 78)";
+    launchStatus.innerText = "Shuttle not ready for launch";
+    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
+    fuelStatus.innerText = "Fuel level too low for launch";
+    cargoStatus.innerText = "Cargo mass low enough for launch";
+  } else if (cargoMass.value > 10000 && fuelLevel.value >= 10000) {
+    list.style.visibility = "visible";
+    launchStatus.innerText = "Shuttle not ready for launch";
+    launchStatus.style.color = "rgb(199, 37, 78)";
+    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
+    cargoStatus.innerText = "Cargo mass too heavy for launch";
+    fuelStatus.innerText = "Fuel level high enough for launch";
+  }
+
   if (cargoMass.value <= 10000 && fuelLevel.value >= 10000) {
-    list.style.visibility = "visible";
+    //list.style.visibility = "hidden";
     launchStatus.innerText = "Shuttle is ready for launch";
-    launchStatus.style.color = "green";
-    pilotStatus.innerText = `Pilot ${pilot.value} is ready for launch`;
-    copilotStatus.innerText = `Co-pilot ${copilot.value} is ready for launch`;
-    fuelStatus.innerText = "Fuel level high enough for launch";
-    cargoStatus.innerText = "Cargo mass low enough for launch";
-  }
-
-  if (fuelLevel.value <= 10000) {
-    list.style.visibility = "visible";
-    launchStatus.style.color = "rgb(199, 37, 78)";
-    launchStatus.innerText = "Shuttle not ready for launch";
-    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
-    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
-    fuelStatus.innerText = "Fuel level too low for launch";
-    cargoStatus.innerText = "Cargo mass low enough for launch";
-  }
-
-  if (cargoMass.value >= 10000) {
-    list.style.visibility = "visible";
-    launchStatus.innerText = "Shuttle not ready for launch";
-    launchStatus.style.color = "rgb(199, 37, 78)";
-    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
-    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
-    cargoStatus.innerText = "Cargo mass too heavy for launch";
-    fuelStatus.innerText = "Fuel level high enough for launch";
-  }
-
-  if (cargoMass.value >= 10000 && fuelLevel.value <= 10000) {
-    list.style.visibility = "visible";
-    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
-    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
-    launchStatus.innerText = "Shuttle not ready for launch";
-    launchStatus.style.color = "rgb(199, 37, 78)";
-    cargoStatus.innerText = "Cargo mass too heavy for launch";
-    fuelStatus.innerText = "Fuel level too low for launch";
+    launchStatus.style.color = "rgb(65, 159, 106)";
+    // pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
+    // copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
+    // fuelStatus.innerText = "Fuel level high enough for launch";
+    // cargoStatus.innerText = "Cargo mass low enough for launch";
   }
 }
 //----------------------------------------------------
